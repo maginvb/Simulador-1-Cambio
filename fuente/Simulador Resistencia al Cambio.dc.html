@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&amp;family=Work+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#F6F9FD;-webkit-font-smoothing:antialiased;} *{box-sizing:border-box;} a{color:#12356B;} a:hover{color:#0B2149;} button{font:inherit;}</style>
+</helmet>
+<div style="min-height:100vh;background:#F6F9FD;font-family:'Work Sans',system-ui,sans-serif;color:#374151;">
+  <header style="background:#FFFFFF;border-bottom:1px solid #E6EBF4;position:{{ headerPos }};top:0;z-index:20;">
+    <div style="max-width:1240px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div style="width:36px;height:36px;border-radius:10px;background:#12356B;color:#FFFFFF;display:grid;place-items:center;font-family:Poppins,sans-serif;font-weight:800;font-size:13px;letter-spacing:.02em;">GC</div>
+        <div style="display:flex;flex-direction:column;gap:2px;">
+          <div style="font-family:Poppins,sans-serif;font-weight:700;font-size:12px;letter-spacing:.08em;color:#12356B;">COMUNIDAD DE GESTIÓN DEL CAMBIO</div>
+          <div style="font-size:12px;color:#64748B;">Simulador de resistencia al cambio</div>
+        </div>
+      </div>
+      <sc-if value="{{ showSteps }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+          <sc-for list="{{ steps }}" as="st" hint-placeholder-count="3">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <sc-if value="{{ st.line }}"><div style="width:20px;height:2px;background:{{ st.lineBg }};border-radius:2px;transition:background .4s;"></div></sc-if>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <div style="width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-family:Poppins,sans-serif;font-weight:700;font-size:12px;background:{{ st.dotBg }};color:{{ st.dotColor }};border:2px solid {{ st.dotBorder }};transition:all .4s;">{{ st.text }}</div>
+                <sc-if value="{{ st.cur }}"><div style="font-size:13px;font-weight:600;color:{{ st.labelColor }};white-space:nowrap;">{{ st.label }}</div></sc-if>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{ hasProto }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="width:34px;height:34px;border-radius:50%;background:#DBE6FB;color:#12356B;display:grid;place-items:center;font-family:Poppins,sans-serif;font-weight:700;font-size:13px;">{{ protoInitials }}</div>
+          <div style="display:flex;flex-direction:column;gap:1px;">
+            <div style="font-size:13px;font-weight:600;color:#374151;white-space:nowrap;">{{ protoName }}</div>
+            <div style="font-size:12px;color:#64748B;">{{ protoRole }}</div>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+  </header>
+
+  <main style="max-width:1240px;margin:0 auto;padding:36px clamp(16px,5vw,24px) 96px;">
+    <sc-if value="{{ isLoading }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:120px 0;text-align:center;color:#64748B;font-size:15px;">Preparando la simulación…</div>
+    </sc-if>
+    <sc-if value="{{ isError }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:120px 0;text-align:center;color:#12356B;font-size:15px;">{{ err }}</div>
+    </sc-if>
+
+    <div style="opacity:{{ enterOpacity }};transform:{{ enterTransform }};transition:{{ enterTransition }};">
+
+      <sc-if value="{{ isIntro }}" hint-placeholder-val="{{ true }}">
+        <section data-screen-label="01 Inicio" style="min-height:calc(100vh - 170px);display:flex;flex-direction:column;justify-content:center;gap:48px;">
+          <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:22px;">
+            <span style="font-size:13px;font-weight:600;letter-spacing:.1em;color:#64748B;white-space:nowrap;">SIMULACIÓN INDIVIDUAL</span>
+            <h1 style="font-family:Poppins,sans-serif;font-weight:800;font-size:clamp(30px,4.2vw,48px);line-height:1.1;letter-spacing:-.02em;color:#12356B;margin:0;max-width:780px;text-wrap:balance;">¿Estás gestionando la resistencia… o la estás aumentando?</h1>
+            <p style="max-width:600px;font-size:18px;line-height:1.6;margin:0;text-wrap:pretty;">Un simulador para explorar cómo tus decisiones como líder pueden reducir —o intensificar— la resistencia durante un cambio.</p>
+            <button onClick="{{ start }}" style="white-space:nowrap;margin-top:10px;padding:16px 30px;border-radius:11px;border:none;background:#12356B;color:#FFFFFF;font-family:Poppins,sans-serif;font-weight:600;font-size:16px;cursor:pointer;box-shadow:0 14px 28px -16px rgba(18,53,107,.6);transition:background .2s,transform .2s;" style-hover="background:#0B2149;transform:translateY(-1px);">Comenzar la simulación →</button>
+          </div>
+        </section>
+      </sc-if>
+
+      <sc-if value="{{ isProto }}" hint-placeholder-val="{{ false }}">
+        <section data-screen-label="02 Protagonista" style="display:flex;flex-direction:column;gap:32px;max-width:960px;margin:0 auto;">
+          <div style="display:flex;flex-direction:column;gap:10px;text-align:center;align-items:center;">
+            <span style="font-size:13px;font-weight:600;letter-spacing:.08em;color:#64748B;">ANTES DE EMPEZAR</span>
+            <h2 style="font-family:Poppins,sans-serif;font-weight:800;font-size:clamp(28px,4vw,40px);line-height:1.15;color:#12356B;margin:0;letter-spacing:-.01em;text-wrap:balance;padding-bottom:4px;">Elige quién liderará el cambio</h2>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;">
+            <sc-for list="{{ protoOpts }}" as="p" hint-placeholder-count="2">
+              <button onClick="{{ p.onClick }}" style="display:flex;align-items:center;gap:18px;padding:24px;background:#FFFFFF;border:2px solid {{ p.border }};border-radius:15px;cursor:pointer;text-align:left;box-shadow:{{ p.shadow }};transition:border-color .2s,box-shadow .25s,transform .2s;" style-hover="transform:translateY(-2px);">
+                <div style="width:64px;height:64px;flex-shrink:0;border-radius:50%;background:{{ p.avatarBg }};color:{{ p.avatarColor }};display:grid;place-items:center;font-family:Poppins,sans-serif;font-weight:700;font-size:22px;transition:all .25s;">{{ p.initials }}</div>
+                <div style="display:flex;flex-direction:column;gap:4px;flex:1;">
+                  <div style="font-family:Poppins,sans-serif;font-weight:700;font-size:20px;color:#12356B;">{{ p.name }}</div>
+                  <div style="font-size:15px;color:#64748B;">{{ p.role }}</div>
+                </div>
+                <div style="width:24px;height:24px;border-radius:50%;border:2px solid {{ p.border }};display:grid;place-items:center;flex-shrink:0;"><div style="width:12px;height:12px;border-radius:50%;background:#12356B;opacity:{{ p.dot }};transition:opacity .2s;"></div></div>
+              </button>
+            </sc-for>
+          </div>
+          <div style="background:#FFFFFF;border:1px solid #E6EBF4;border-radius:15px;padding:clamp(20px,5vw,28px);box-shadow:0 10px 24px -18px rgba(18,53,107,0.16);display:flex;flex-direction:column;gap:22px;">
+            <div style="font-size:12px;font-weight:600;letter-spacing:.08em;color:#64748B;">PERFIL DEL ROL</div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;">
+              <div style="background:#F6F9FD;border-radius:11px;padding:16px;display:flex;flex-direction:column;gap:4px;"><span style="font-family:Poppins,sans-serif;font-weight:800;font-size:32px;color:#12356B;line-height:1;">{{ spOrg }}</span><span style="font-size:14px;color:#64748B;">años en la organización</span></div>
+              <div style="background:#F6F9FD;border-radius:11px;padding:16px;display:flex;flex-direction:column;gap:4px;"><span style="font-family:Poppins,sans-serif;font-weight:800;font-size:32px;color:#12356B;line-height:1;">{{ spCargo }}</span><span style="font-size:14px;color:#64748B;">años en el cargo</span></div>
+              <div style="background:#F6F9FD;border-radius:11px;padding:16px;display:flex;flex-direction:column;gap:4px;"><span style="font-family:Poppins,sans-serif;font-weight:800;font-size:32px;color:#12356B;line-height:1;">{{ spPersonas }}</span><span style="font-size:14px;color:#64748B;">personas a cargo</span></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:10px;padding-top:22px;border-top:1px solid #E6EBF4;">
+              <div style="font-size:12px;font-weight:600;letter-spacing:.08em;color:#64748B;">EL CAMBIO QUE DEBES LIDERAR</div>
+              <p style="margin:0;max-width:640px;font-size:16px;line-height:1.65;color:#374151;text-wrap:pretty;">La organización se prepara para implementar un nuevo proceso digital que modificará parte de la forma habitual de trabajar. La preparación ya ha comenzado: el equipo debe familiarizarse con la nueva forma de trabajo y realizar prácticas mientras la operación continúa funcionando.</p>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:10px;padding-top:22px;border-top:1px solid #E6EBF4;">
+              <div style="font-size:12px;font-weight:600;letter-spacing:.08em;color:#64748B;">TU PUNTO DE PARTIDA</div>
+              <div style="display:flex;flex-direction:column;gap:6px;max-width:640px;font-size:16px;line-height:1.65;color:#374151;">
+                <p style="margin:0;text-wrap:pretty;">El plan contempla <strong style="font-weight:700;color:#12356B;">10 días</strong> para preparar el lanzamiento.</p>
+                <p style="margin:0;text-wrap:pretty;">La simulación comienza en el <strong style="font-weight:700;color:#12356B;">Día 2</strong>, cuando quedan <strong style="font-weight:700;color:#12356B;">8 días</strong> para el lanzamiento.</p>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:center;">
+            <button onClick="{{ confirmProto }}" disabled="{{ protoDisabled }}" style="white-space:nowrap;padding:16px 30px;border-radius:11px;border:none;background:#12356B;color:#FFFFFF;font-family:Poppins,sans-serif;font-weight:600;font-size:16px;cursor:{{ protoCursor }};opacity:{{ protoBtnOpacity }};transition:background .2s,opacity .2s;" style-hover="background:#0B2149;">{{ protoBtnText }}</button>
+          </div>
+        </section>
+      </sc-if>
+
+      <sc-if value="{{ isPlay }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start;max-width:1080px;margin:0 auto;">
+          <div style="flex:1 1 460px;min-width:0;display:flex;flex-direction:column;gap:24px;">
+
+            <sc-if value="{{ isSituation }}">
+              <section data-screen-label="Situación" style="display:flex;flex-direction:column;gap:24px;max-width:720px;width:100%;margin:0 auto;">
+                <sc-if value="{{ hasDay }}">
+                  <div style="background:#FFFFFF;border:1px solid #E6EBF4;border-radius:14px;padding:18px 20px;display:flex;flex-direction:column;gap:12px;">
+                    <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px;">
+                      <span style="font-family:Poppins,sans-serif;font-weight:700;color:#12356B;">{{ dayText }}</span>
+                      <span style="color:#64748B;font-weight:600;">{{ faltanText }} para el lanzamiento</span>
+                    </div>
+                    <div style="display:flex;gap:5px;">
+                      <sc-for list="{{ ticks }}" as="t" hint-placeholder-count="10">
+                        <div style="flex:1;height:8px;border-radius:4px;background:{{ t.bg }};"></div>
+                      </sc-for>
+                    </div>
+                  </div>
+                </sc-if>
+                <div style="display:flex;flex-direction:column;gap:14px;">
+                  <span style="font-size:13px;font-weight:600;letter-spacing:.08em;color:#64748B;">SITUACIÓN {{ roundN }} DE {{ roundTotal }}</span>
+                  <h2 style="font-family:Poppins,sans-serif;font-weight:800;font-size:clamp(26px,3.4vw,38px);line-height:1.15;color:#12356B;margin:0;letter-spacing:-.01em;text-wrap:balance;">{{ sitTitle }}</h2>
+                </div>
+                <sc-if value="{{ hasContext }}">
+                  <div style="background:#12356B;color:#FFFFFF;border-radius:14px;padding:20px 22px;display:flex;flex-direction:column;gap:8px;">
+                    <span style="font-size:12px;font-weight:600;letter-spacing:.08em;color:#DBE6FB;">LO QUE CAMBIÓ TRAS TU DECISIÓN ANTERIOR</span>
+                    <sc-for list="{{ contexts }}" as="c" hint-placeholder-count="1">
+                      <p style="margin:0;font-size:17px;line-height:1.6;text-wrap:pretty;">{{ c }}</p>
+                    </sc-for>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ hasScene }}">
+                  <div style="display:flex;flex-direction:column;gap:30px;padding:4px 0 8px;">
+                    <div style="display:flex;flex-direction:column;gap:6px;">
+                      <p style="margin:0;font-family:Poppins,sans-serif;font-weight:600;font-size:21px;line-height:1.4;color:#12356B;text-wrap:pretty;">{{ scene.fact }}</p>
+                      <sc-if value="{{ scene.hasFactNote }}"><p style="margin:0;font-size:17px;line-height:1.6;color:#374151;text-wrap:pretty;">{{ scene.factNote }}</p></sc-if>
+                    </div>
+                    <sc-if value="{{ scene.hasVoices }}">
+                      <div style="display:flex;flex-direction:column;gap:12px;">
+                        <span style="font-size:14px;font-weight:600;color:#64748B;">{{ scene.voicesLabel }}</span>
+                        <div style="display:flex;flex-direction:column;gap:10px;border-left:2px solid #DBE6FB;padding-left:16px;">
+                          <sc-for list="{{ scene.voices }}" as="v" hint-placeholder-count="3">
+                            <p style="margin:0;font-size:17px;line-height:1.5;color:#374151;text-wrap:pretty;">{{ v }}</p>
+                          </sc-for>
+                        </div>
+                      </div>
+                    </sc-if>
+                    <sc-for list="{{ scene.speakers }}" as="sp" hint-placeholder-count="1">
+                      <div style="display:flex;flex-direction:column;gap:12px;">
+                        <span style="font-size:14px;font-weight:600;color:#64748B;">{{ sp.who }}</span>
+                        <div style="border-left:2px solid #DBE6FB;padding-left:16px;">
+                          <p style="margin:0;font-size:17px;line-height:1.5;color:#374151;text-wrap:pretty;">{{ sp.quote }}</p>
+                        </div>
+                      </div>
+                    </sc-for>
+                    <sc-if value="{{ scene.hasConstraint }}">
+                      <div style="display:flex;flex-direction:column;gap:12px;">
+                        <span style="font-size:14px;font-weight:600;color:#64748B;">Restricción</span>
+                        <div style="border-left:2px solid #DBE6FB;padding-left:16px;">
+                          <p style="margin:0;font-size:17px;line-height:1.5;color:#374151;">{{ scene.constraint }}</p>
+                        </div>
+                      </div>
+                    </sc-if>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ noScene }}">
+                <div style="background:#FFFFFF;border:1px solid #E6EBF4;border-radius:15px;padding:26px 28px;box-shadow:0 10px 24px -18px rgba(18,53,107,0.16);display:flex;flex-direction:column;gap:12px;">
+                  <sc-for list="{{ framingParas }}" as="fp" hint-placeholder-count="4">
+                    <p style="margin:0;font-size:17px;line-height:1.6;color:#374151;text-wrap:pretty;">{{ fp }}</p>
+                  </sc-for>
+                </div>
+                </sc-if>
+                <div style="display:flex;flex-direction:column;gap:12px;">
+                  <h3 style="margin:12px 0 4px;padding-top:24px;border-top:1px solid #E6EBF4;font-family:Poppins,sans-serif;font-weight:700;font-size:24px;line-height:1.2;color:#12356B;">¿Qué haces?</h3>
+                  <sc-for list="{{ options }}" as="op" hint-placeholder-count="3">
+                    <button onClick="{{ op.onClick }}" style="display:flex;gap:18px;align-items:flex-start;text-align:left;padding:22px;background:{{ op.bg }};border:2px solid {{ op.border }};border-radius:14px;cursor:pointer;box-shadow:{{ op.shadow }};transition:border-color .2s,box-shadow .25s,background .2s,transform .2s;" style-hover="border-color:#12356B;transform:translateY(-2px);">
+                      <div style="width:42px;height:42px;flex-shrink:0;border-radius:11px;display:grid;place-items:center;font-family:Poppins,sans-serif;font-weight:800;font-size:17px;background:{{ op.letterBg }};color:{{ op.letterColor }};transition:all .2s;">{{ op.letter }}</div>
+                      <div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:0;">
+                        <div style="font-family:Poppins,sans-serif;font-weight:700;font-size:18px;color:#12356B;">{{ op.title }}</div>
+                        <div style="font-size:16px;line-height:1.6;color:#374151;text-wrap:pretty;">{{ op.body }}</div>
+                      </div>
+                    </button>
+                  </sc-for>
+                </div>
+                <sc-if value="{{ hasSel }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;justify-content:flex-end;">
+                    <button onClick="{{ confirm }}" style="white-space:nowrap;padding:16px 28px;border-radius:11px;border:none;background:#12356B;color:#FFFFFF;font-family:Poppins,sans-serif;font-weight:600;font-size:16px;cursor:pointer;transition:background .2s;" style-hover="background:#0B2149;">Confirmar decisión →</button>
+                  </div>
+                </sc-if>
+              </section>
+            </sc-if>
+
+            <sc-if value="{{ isConsequence }}">
+              <section data-screen-label="Consecuencia" style="display:flex;flex-direction:column;gap:20px;">
+                <div style="background:#FFFFFF;border:1px solid #E6EBF4;border-radius:15px;padding:32px;box-shadow:0 10px 24px -18px rgba(18,53,107,0.16);display:flex;flex-direction:column;gap:18px;">
+                  <span style="font-size:13px;font-weight:600;letter-spacing:.08em;color:#64748B;">TU DECISIÓN · {{ roundN }} DE {{ roundTotal }}</span>
+                  <div style="font-family:Poppins,sans-serif;font-weight:800;font-size:clamp(40px,6vw,64px);line-height:1;color:#12356B;letter-spacing:-.02em;">{{ trajLabel }}</div>
+                  <div style="display:flex;gap:12px;align-items:flex-start;padding:14px 16px;background:#F6F9FD;border-radius:11px;">
+                    <div style="width:30px;height:30px;flex-shrink:0;border-radius:8px;background:#12356B;color:#FFFFFF;display:grid;place-items:center;font-family:Poppins,sans-serif;font-weight:700;font-size:13px;">{{ chosenLetter }}</div>
+                    <div style="display:flex;flex-direction:column;gap:4px;"><span style="font-family:Poppins,sans-serif;font-weight:600;font-size:15px;color:#12356B;">{{ chosenTitle }}</span><span style="font-size:14px;line-height:1.55;color:#64748B;">{{ chosenBody }}</span></div>
+                  </div>
+                  <p style="margin:6px 0 0;font-family:Poppins,sans-serif;font-weight:500;font-size:clamp(19px,2.2vw,23px);line-height:1.5;color:#0B2149;text-wrap:pretty;">{{ feedback }}</p>
+                </div>
+                <sc-if value="{{ showDebrief }}">
+                  <div style="background:#DBE6FB;border-radius:15px;padding:28px;display:flex;flex-direction:column;gap:18px;">
+                    <div style="display:flex;flex-direction:column;gap:6px;">
+                      <span style="font-size:12px;font-weight:600;letter-spacing:.08em;color:#12356B;">QUÉ ESTABA EN JUEGO</span>
+                      <p style="margin:0;font-size:17px;line-height:1.6;color:#0B2149;text-wrap:pretty;">{{ queEstaba }}</p>
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:10px;">
+                      <span style="font-size:12px;font-weight:600;letter-spacing:.08em;color:#12356B;">PARA REFLEXIONAR</span>
+                      <sc-for list="{{ paraDiscutir }}" as="q" hint-placeholder-count="2">
+                        <div style="display:flex;gap:12px;align-items:flex-start;background:#FFFFFF;border-radius:11px;padding:14px 16px;">
+                          <span style="font-family:Poppins,sans-serif;font-weight:800;color:#12356B;font-size:15px;">{{ q.n }}</span>
+                          <span style="font-size:16px;line-height:1.5;color:#374151;">{{ q.text }}</span>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </div>
+                </sc-if>
+                <div style="display:flex;justify-content:flex-end;">
+                  <button onClick="{{ next }}" style="white-space:nowrap;padding:16px 28px;border-radius:11px;border:none;background:#12356B;color:#FFFFFF;font-family:Poppins,sans-serif;font-weight:600;font-size:16px;cursor:pointer;transition:background .2s;" style-hover="background:#0B2149;">{{ nextText }}</button>
+                </div>
+              </section>
+            </sc-if>
+          </div>
+
+          <sc-if value="{{ showHud }}">
+            <aside style="flex:0 1 340px;min-width:280px;position:sticky;top:88px;background:#FFFFFF;border:1px solid #E6EBF4;border-radius:15px;padding:22px 22px 10px;box-shadow:0 10px 24px -18px rgba(18,53,107,0.16);">
+              <div style="display:flex;flex-direction:column;gap:6px;padding-bottom:14px;">
+                <span style="font-family:Poppins,sans-serif;font-weight:700;font-size:15px;color:#12356B;">Impacto simulado de tu decisión</span>
+                <span style="font-size:12px;line-height:1.5;color:#64748B;text-wrap:pretty;">Estos indicadores representan el escenario del simulador. No son una medición real de la organización.</span>
+              </div>
+              <sc-for list="{{ hud }}" as="ind" hint-placeholder-count="4">
+                <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0;border-top:1px solid #E6EBF4;">
+                  <span style="font-size:14px;font-weight:600;color:#374151;line-height:1.35;">{{ ind.label }}</span>
+                  <span style="display:flex;align-items:center;gap:6px;padding:3px 10px;border-radius:99px;background:{{ ind.chipBg }};color:{{ ind.chipColor }};font-size:13px;font-weight:600;white-space:nowrap;flex-shrink:0;">{{ ind.deltaText }}</span>
+                </div>
+              </sc-for>
+            </aside>
+          </sc-if>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isReport }}" hint-placeholder-val="{{ false }}">
+        <section data-screen-label="Informe final" style="width:100%;max-width:740px;margin:0 auto;padding-top:12px;display:flex;flex-direction:column;gap:32px;">
+          <article style="display:flex;flex-direction:column;background:#FFFFFF;border:1px solid #E6EBF4;border-radius:12px;padding:clamp(28px,5vw,56px);">
+            <header style="display:flex;flex-direction:column;gap:14px;padding-bottom:40px;">
+              <span style="font-size:12px;font-weight:600;letter-spacing:.08em;color:#64748B;">INFORME FINAL DE SIMULACIÓN</span>
+              <p style="margin:0;font-family:Poppins,sans-serif;font-weight:600;font-size:17px;line-height:1.4;color:#64748B;text-wrap:balance;">¿Estás gestionando la resistencia… o la estás aumentando?</p>
+              <h1 style="margin:6px 0 0;font-family:Poppins,sans-serif;font-weight:700;font-size:clamp(24px,3.2vw,31px);line-height:1.25;letter-spacing:-.01em;color:#12356B;text-wrap:balance;">{{ rpVerdict }}</h1>
+              <p style="margin:2px 0 0;font-size:17px;line-height:1.7;color:#374151;text-wrap:pretty;">{{ rpExplanation }}</p>
+            </header>
+            <div style="display:flex;flex-direction:column;gap:14px;padding:36px 0;border-top:1px solid #E6EBF4;">
+              <h2 style="margin:0;font-family:Poppins,sans-serif;font-weight:600;font-size:18px;color:#12356B;">01 · ¿Qué ocurrió con el cambio?</h2>
+              <div style="display:flex;flex-direction:column;">
+                <sc-for list="{{ rpIndicators }}" as="ri" hint-placeholder-count="4">
+                  <div style="display:flex;justify-content:space-between;align-items:center;gap:8px 20px;flex-wrap:wrap;padding:13px 0;border-top:1px solid #F0F3F8;">
+                    <span style="font-size:16px;line-height:1.4;color:#374151;">{{ ri.label }}</span>
+                    <span style="display:flex;align-items:center;gap:8px;padding:4px 12px;border-radius:99px;background:{{ ri.bg }};color:{{ ri.color }};font-size:14px;font-weight:600;white-space:nowrap;"><span style="width:8px;height:8px;border-radius:50%;background:{{ ri.color }};"></span>{{ ri.state }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:12px;padding:36px 0;border-top:1px solid #E6EBF4;">
+              <h2 style="margin:0;font-family:Poppins,sans-serif;font-weight:600;font-size:18px;color:#12356B;">{{ rpTensionHeading }}</h2>
+              <p style="margin:0;font-family:Poppins,sans-serif;font-weight:600;font-size:17px;line-height:1.45;color:#0B2149;text-wrap:pretty;">{{ rpTensionTitle }}</p>
+              <sc-if value="{{ rpHasTensionText }}"><p style="margin:0;font-size:16px;line-height:1.7;color:#374151;text-wrap:pretty;">{{ rpTensionText }}</p></sc-if>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:12px;padding-top:36px;border-top:1px solid #E6EBF4;">
+              <h2 style="margin:0;font-family:Poppins,sans-serif;font-weight:600;font-size:18px;color:#12356B;">03 · Qué puedes llevar a tu próxima gestión</h2>
+              <p style="margin:0;font-family:Poppins,sans-serif;font-weight:600;font-size:17px;line-height:1.45;color:#0B2149;text-wrap:pretty;">{{ rpNextStep }}</p>
+              <sc-if value="{{ rpHasNextStepText }}"><p style="margin:0;font-size:16px;line-height:1.7;color:#374151;text-wrap:pretty;">{{ rpNextStepText }}</p></sc-if>
+            </div>
+          </article>
+          <div style="display:flex;justify-content:center;">
+            <button onClick="{{ restart }}" style="white-space:nowrap;padding:14px 26px;border-radius:11px;border:1.5px solid #12356B;background:#FFFFFF;color:#12356B;font-family:Poppins,sans-serif;font-weight:600;font-size:15px;cursor:pointer;transition:background .2s;" style-hover="background:#DBE6FB;">Volver a jugar</button>
+          </div>
+        </section>
+      </sc-if>
+
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;hudBeforeDecision&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Experiencia&quot;},&quot;showDebrief&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Experiencia&quot;},&quot;motion&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Suave&quot;,&quot;Ninguna&quot;],&quot;default&quot;:&quot;Suave&quot;,&quot;tsType&quot;:&quot;'Suave' | 'Ninguna'&quot;,&quot;section&quot;:&quot;Experiencia&quot;}}">
+class Component extends DCLogic {
+  state = { cfg: null, err: null, screen: 'intro', proto: null, ri: 0, sel: null, decisions: {}, vals: {}, disp: {}, history: [], lastDelta: {}, entered: true, showSources: false };
+  KEY = 'dc-sim-resistencia-o-aumento-001';
+
+  componentDidMount() {
+    this.onResize = () => { const n = window.innerWidth < 720; if (n !== this.state.narrow) this.setState({ narrow: n }); };
+    this.onResize(); window.addEventListener('resize', this.onResize);
+    Promise.all([
+      fetch('uploads/resistencia-o-aumento-001_v1.1_DRAFT.json').then(r => { if (!r.ok) throw new Error('No se pudo cargar la configuración del simulador.'); return r.json(); }),
+      import('./report-logic.js')
+    ])
+      .then(([cfg, RL]) => {
+        this.RL = RL;
+        const init = this.init(cfg);
+        let saved = null;
+        try { saved = JSON.parse(localStorage.getItem(this.KEY) || 'null'); } catch (e) {}
+        if (saved && saved.id === cfg.metadata.simulatorId && saved.v === cfg.metadata.configVersion && saved.s) this.setState({ cfg, ...saved.s, screen: saved.s.screen === 'round' ? 'situation' : saved.s.screen, disp: saved.s.vals });
+        else this.setState({ cfg, vals: init, disp: init, history: [init] });
+        try { window.__reportQA = RL.runQA(cfg); } catch (e) {}
+      })
+      .catch(e => this.setState({ err: e.message }));
+  }
+  componentWillUnmount() { cancelAnimationFrame(this.raf); clearTimeout(this.tt); window.removeEventListener('resize', this.onResize); }
+  init(cfg) { const o = {}; cfg.indicators.forEach(i => (o[i.id] = i.initial)); return o; }
+  motion() { return (this.props.motion ?? 'Suave') !== 'Ninguna'; }
+  persist() {
+    const s = this.state; if (!s.cfg) return;
+    const { screen, proto, ri, sel, decisions, vals, history, lastDelta } = s;
+    try { localStorage.setItem(this.KEY, JSON.stringify({ id: s.cfg.metadata.simulatorId, v: s.cfg.metadata.configVersion, s: { screen, proto, ri, sel, decisions, vals, history, lastDelta } })); } catch (e) {}
+  }
+  go(screen, extra) {
+    this.setState({ ...(extra || {}), screen, entered: false }, () => {
+      try { window.scrollTo({ top: 0, behavior: this.motion() ? 'smooth' : 'auto' }); } catch (e) {}
+      this.persist();
+      clearTimeout(this.et);
+      this.et = setTimeout(() => this.setState({ entered: true }), 40);
+    });
+  }
+  sit() { return this.state.cfg.rounds[this.state.ri].situations[0]; }
+  split(t) { const i = t.indexOf(':'); return i < 0 ? { title: t, body: '' } : { title: t.slice(0, i), body: t.slice(i + 1).trim() }; }
+  confirm() {
+    const { cfg, sel, vals, decisions, history } = this.state; if (!sel) return;
+    const s = this.sit(); const op = s.options.find(o => o.id === sel);
+    const nv = { ...vals }, d = {};
+    cfg.indicators.forEach(i => { const v = Math.max(i.min, Math.min(i.max, vals[i.id] + (op.effects[i.id] || 0))); nv[i.id] = v; d[i.id] = v - vals[i.id]; });
+    this.go('consequence', { vals: nv, lastDelta: d, decisions: { ...decisions, [s.id]: op.id }, history: [...history, nv], disp: vals });
+    clearTimeout(this.tt);
+    this.tt = setTimeout(() => this.tween(vals, nv), this.motion() ? 450 : 0);
+  }
+  tween(a, b) {
+    cancelAnimationFrame(this.raf);
+    if (!this.motion()) { this.setState({ disp: b }); return; }
+    const t0 = performance.now(), D = 1100;
+    const step = now => {
+      const t = Math.min(1, (now - t0) / D), e = 1 - Math.pow(1 - t, 3), o = {};
+      Object.keys(b).forEach(k => (o[k] = Math.round(a[k] + (b[k] - a[k]) * e)));
+      this.setState({ disp: o });
+      if (t < 1) this.raf = requestAnimationFrame(step);
+    };
+    this.raf = requestAnimationFrame(step);
+  }
+  next() { const { cfg, ri } = this.state; if (ri < cfg.rounds.length - 1) this.go('situation', { ri: ri + 1, sel: null }); else this.go('report'); }
+  restart() {
+    const init = this.init(this.state.cfg);
+    try { localStorage.removeItem(this.KEY); } catch (e) {}
+    this.go('intro', { proto: null, ri: 0, sel: null, decisions: {}, vals: init, disp: init, history: [init], lastDelta: {}, showSources: false });
+  }
+  delta(d, ind) {
+    const risk = ind && ind.id === 'riesgo_cronograma';
+    const G = { bg: '#E4F3EA', color: '#1F6B45' }, A = { bg: '#FCEFD9', color: '#8A5205' };
+    if (d > 0) return risk ? { text: '↑ Aumenta el riesgo', ...A } : { text: '↑ Mejora', ...G };
+    if (d < 0) return risk ? { text: '↓ Disminuye el riesgo', ...G } : { text: '↓ Disminuye', ...A };
+    return { text: '→ Sin cambio', bg: '#EEF2F7', color: '#64748B' };
+  }
+  chip(ind, d) {
+    if (d === 0) return { text: 'Sin cambio', bg: '#F6F9FD', color: '#64748B', border: '#E6EBF4' };
+    const fav = ind.direction === 'lower-is-better' ? d < 0 : d > 0;
+    const t = (d > 0 ? '+' : '') + d;
+    return fav ? { text: t + ' · Favorable', bg: '#12356B', color: '#FFFFFF', border: '#12356B' } : { text: t + ' · Desfavorable', bg: '#FFFFFF', color: '#12356B', border: '#12356B' };
+  }
+  dirText(ind) { return ind.direction === 'lower-is-better' ? 'Menor es mejor' : 'Mayor es mejor'; }
+
+/*REPORT: lógica en report-logic.js (config v1.1)*/
+  renderVals() {
+    const s = this.state, cfg = s.cfg, N = '#12356B';
+    const mv = this.motion();
+    const out = {
+      headerPos: s.narrow ? 'static' : 'sticky', isLoading: !cfg && !s.err, isError: !!s.err, err: s.err,
+      enterOpacity: s.entered ? 1 : 0, enterTransform: s.entered ? 'translateY(0)' : 'translateY(16px)',
+      enterTransition: mv ? 'opacity .55s ease, transform .6s cubic-bezier(.2,.7,.2,1)' : 'none',
+      isIntro: false, isProto: false, isRound: false, isPlay: false, isSituation: false, isConsequence: false, isReport: false,
+      showSteps: false, hasProto: false, steps: [], introRounds: [], protoOpts: [], hud: [], options: [], ticks: [], contexts: [], rpIndicators: []
+    };
+    if (!cfg) return out;
+    const md = cfg.metadata, sc = s.screen, rounds = cfg.rounds, ext = cfg.runtimeExtensions, labels = ext.trajectoryLabels;
+    Object.assign(out, {
+      isIntro: sc === 'intro', isProto: sc === 'proto', isRound: sc === 'round',
+      isPlay: sc === 'situation' || sc === 'consequence', isSituation: sc === 'situation', isConsequence: sc === 'consequence', isReport: sc === 'report',
+      tema: md.tema, objetivo: md.objetivo, duracion: md.duracionSimuladorMin, participantes: md.participantes, modalidad: md.modalidad, mode: md.mode,
+      introRounds: rounds.map((r, i) => ({ n: i + 1, label: r.label, proposito: r.proposito })),
+      start: () => this.go(ext.protagonistSelection.enabled ? 'proto' : 'situation', { ri: 0, sel: null }),
+      showSteps: ['situation', 'consequence', 'report'].includes(sc)
+    });
+    out.steps = rounds.map((r, i) => {
+      const done = sc === 'report' || i < s.ri || (i === s.ri && sc === 'consequence');
+      const cur = i === s.ri && sc !== 'report';
+      return { cur, line: i > 0, lineBg: i <= s.ri || sc === 'report' ? N : '#E6EBF4', label: (i + 1) + ' de ' + rounds.length, text: done ? '✓' : String(i + 1),
+        dotBg: done ? N : cur ? '#DBE6FB' : '#FFFFFF', dotColor: done ? '#FFFFFF' : N, dotBorder: done || cur ? N : '#E6EBF4', labelColor: done || cur ? N : '#64748B' };
+    });
+
+    const ps = ext.protagonistSelection, sp = ps.sharedProfile;
+    const ini = n => n.split(' ').map(w => w[0]).slice(0, 2).join('');
+    const proto = ps.options.find(o => o.id === s.proto);
+    Object.assign(out, {
+      hasProto: !!proto && sc !== 'intro' && sc !== 'proto',
+      protoName: proto ? proto.name : '', protoRole: proto ? proto.role : '', protoInitials: proto ? ini(proto.name) : '',
+      spOrg: sp.antiguedadOrganizacionAnos, spCargo: sp.antiguedadCargoAnos, spPersonas: sp.personasACargo, spDesc: sp.descripcion,
+      protoOpts: ps.options.map(o => {
+        const on = o.id === s.proto;
+        return { name: o.name, role: o.role, initials: ini(o.name), onClick: () => this.setState({ proto: o.id }),
+          border: on ? N : '#E6EBF4', shadow: on ? '0 18px 34px -20px rgba(18,53,107,.55)' : '0 10px 24px -18px rgba(18,53,107,0.16)',
+          avatarBg: on ? N : '#DBE6FB', avatarColor: on ? '#FFFFFF' : N, dot: on ? 1 : 0 };
+      }),
+      protoBtnText: 'Comenzar la simulación', protoDisabled: !proto,
+      protoBtnOpacity: proto ? 1 : 0.45, protoCursor: proto ? 'pointer' : 'not-allowed',
+      confirmProto: () => { if (s.proto) this.go('situation', { ri: 0, sel: null }); }
+    });
+
+    const round = rounds[s.ri], sit = round.situations[0];
+    const dm = sit.framing.match(/Día \d+/), fm = sit.framing.match(/Faltan \d+ días/);
+    const day = dm ? parseInt(dm[0].slice(4)) : 0, falt = fm ? parseInt(fm[0].slice(7)) : 0, total = day + falt;
+    Object.assign(out, {
+      roundN: s.ri + 1, roundTotal: rounds.length, roundLabel: round.label, roundLabelUpper: round.label.toUpperCase(), roundProposito: round.proposito,
+      hasDay: !!(dm && fm), dayText: dm ? dm[0] : '', faltanText: fm ? fm[0] : '',
+      ticks: Array.from({ length: total }, (_, i) => ({ bg: i + 1 < day ? 'rgba(18,53,107,0.35)' : i + 1 === day ? N : '#E6EBF4' })),
+      enterSituation: () => this.go('situation', { sel: null }),
+      sitTitle: sit.title, framing: sit.framing
+    });
+    const fps = sit.framing.includes('\n') ? sit.framing.split(/\n+/).map(t => t.trim()).filter(t => t && !/^Día \d+ · Faltan \d+ días$/.test(t)) : sit.framing.replace(/^Día \d+\.\s*Faltan \d+ días\.\s*/, '').split(/(?<=[.?!])\s+(?=[A-ZÁÉÍÓÚÑ¿¡])/).map(t => t.trim()).filter(Boolean);
+    const multi = sit.framing.includes('\n') && fps.length > 2;
+    Object.assign(out, { framingParas: multi ? fps.slice(0, -1) : fps, framingLast: multi ? fps[fps.length - 1] : '', hasFramingLast: multi });
+    const SCENES = {
+      S1: { fact: 'Seis personas aún no completan las prácticas previstas.', voicesLabel: 'En el equipo empiezan a surgir dudas', voices: ['“¿Para qué sirve realmente este nuevo proceso?”', '“¿Qué va a cambiar en nuestra forma de trabajar?”', '“¿De verdad facilitará la operación?”'], speakers: [{ who: 'Bruno · Operador con experiencia', quote: '“El diseño no refleja suficientemente lo que pasa en la operación diaria.”' }], constraint: 'El cronograma no se mueve.' },
+      S2: { fact: 'Algo más de la mitad del equipo completa correctamente las prácticas.', voicesLabel: 'En el resto del equipo', voices: ['Otras personas repiten errores o abandonan ejercicios.', 'Algunas temen quedar expuestas por equivocarse.', 'Otras señalan que la carga de trabajo les deja poco tiempo.'], speakers: [], constraint: 'La fecha no puede modificarse.' },
+      S3: { fact: 'El nuevo proceso exige una aprobación adicional antes de cerrar determinados casos urgentes.', factNote: 'Ese paso busca aumentar el control.', voices: [], speakers: [{ who: 'Bruno y otros operadores', quote: 'Sostienen que ese paso puede generar retrasos.' }, { who: 'Responsable del proyecto', quote: 'Advierte que modificar el diseño tan cerca del lanzamiento también supone un riesgo.' }], constraint: '' }
+    };
+    const scn = SCENES[sit.id];
+    out.hasScene = !!scn; out.noScene = !scn;
+    out.scene = scn ? { ...scn, hasFactNote: !!scn.factNote, hasVoices: scn.voices.length > 0, hasConstraint: !!scn.constraint } : { speakers: [], voices: [] };
+    const ctx = cfg.conditionalEvents
+      .filter(e => e.effect.situationId === sit.id && e.effect.contextMode === 'prepend' && e.condition.type === 'decision' && e.condition.op === 'selected' && s.decisions[e.condition.ref] === e.condition.value)
+      .sort((a, b) => b.priority - a.priority).map(e => e.effect.contextText);
+    out.contexts = ctx; out.hasContext = ctx.length > 0;
+    out.options = sit.options.map((o, i) => {
+      const on = o.id === s.sel, sp2 = this.split(o.texto);
+      return { letter: String.fromCharCode(65 + i), title: sp2.title, body: sp2.body ? sp2.body.charAt(0).toUpperCase() + sp2.body.slice(1) : '', onClick: () => this.setState({ sel: o.id }, () => this.persist()),
+        bg: on ? '#F6F9FD' : '#FFFFFF', border: on ? N : '#E6EBF4', shadow: on ? '0 18px 34px -22px rgba(18,53,107,.6)' : '0 10px 24px -18px rgba(18,53,107,0.16)',
+        letterBg: on ? N : '#DBE6FB', letterColor: on ? '#FFFFFF' : N };
+    });
+    Object.assign(out, { confirm: () => this.confirm(), hasSel: !!s.sel });
+
+    const chosenId = s.decisions[sit.id], chosen = sit.options.find(o => o.id === chosenId);
+    if (chosen) {
+      const c = this.split(chosen.texto);
+      Object.assign(out, { trajLabel: labels[chosen.id], chosenLetter: String.fromCharCode(65 + sit.options.indexOf(chosen)), chosenTitle: c.title, chosenBody: c.body ? c.body.charAt(0).toUpperCase() + c.body.slice(1) : c.body, feedback: chosen.feedback_alumno });
+    }
+    Object.assign(out, {
+      showDebrief: (this.props.showDebrief ?? true) && !!sit.debrief,
+      queEstaba: sit.debrief ? sit.debrief.queEstabaEnJuego : '',
+      paraDiscutir: sit.debrief ? sit.debrief.paraDiscutir.map((t, i) => ({ n: String(i + 1).padStart(2, '0'), text: t })) : [],
+      next: () => this.next(), nextText: s.ri < rounds.length - 1 ? 'Siguiente situación →' : 'Ver informe final →'
+    });
+    const hudOn = this.props.hudBeforeDecision ?? false;
+    out.showHud = sc === 'consequence' || (hudOn && sc === 'situation' && Object.keys(s.lastDelta).length > 0);
+    const hudLabels = { apertura_oposicion: 'Apertura para expresar preocupaciones', capacidad_adaptacion: 'Condiciones para adaptarse', ajuste_operativo: 'Ajuste a la realidad operativa', riesgo_cronograma: 'Riesgo sobre el cronograma' };
+    out.hud = cfg.indicators.map(ind => {
+      const ch = this.delta(s.lastDelta[ind.id] ?? 0, ind);
+      return { label: hudLabels[ind.id] || ind.label, deltaText: ch.text, chipBg: ch.bg, chipColor: ch.color };
+    });
+
+    out.restart = () => this.restart();
+    if (sc === 'report' && this.RL) {
+      const rp = this.RL.buildReport(cfg, s.decisions);
+      const T = { favorable: { bg: '#E4F3EA', color: '#1F6B45' }, unfavorable: { bg: '#FCEFD9', color: '#8A5205' }, neutral: { bg: '#EEF2F7', color: '#64748B' } };
+      Object.assign(out, { rpVerdict: rp.verdict, rpExplanation: rp.explanation, rpIndicators: rp.indicators.map(i => ({ label: i.label, state: i.state, ...T[i.tone] })), rpTensionTitle: rp.tensionTitle, rpTensionText: rp.tensionText, rpHasTensionText: !!rp.tensionText, rpNextStep: rp.nextStep, rpTensionHeading: rp.tensionHeading, rpNextStepText: rp.nextStepText, rpHasNextStepText: !!rp.nextStepText });
+    }
+    return out;
+  }
+}
+</script>
+</body>
+</html>

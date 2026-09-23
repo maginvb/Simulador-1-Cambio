@@ -1,0 +1,876 @@
+{
+  "schemaVersion": "1.0",
+  "status": {
+    "content": "DRAFT",
+    "note": "Pendiente de validación explícita. No pasa a APPROVED automáticamente.",
+    "previousVersion": "1.0 (APPROVED)"
+  },
+  "metadata": {
+    "simulatorId": "resistencia-o-aumento-001",
+    "configVersion": "1.1",
+    "tema": "Gestión de la oposición y resistencia durante el cambio",
+    "objetivo": "Practicar decisiones de liderazgo para comprender qué hay detrás de la oposición, facilitar el aprendizaje y utilizar voces críticas como información potencial para mejorar un cambio.",
+    "duracionTallerMin": 75,
+    "duracionSimuladorMin": 75,
+    "participantes": "Líderes y jefaturas que gestionan procesos de cambio",
+    "modalidad": "virtual",
+    "mode": "individual",
+    "preVote": false
+  },
+  "runtimeExtensions": {
+    "protagonistSelection": {
+      "enabled": true,
+      "options": [
+        {
+          "id": "VALERIA",
+          "name": "Valeria Rojas",
+          "role": "Jefa de Operaciones"
+        },
+        {
+          "id": "DIEGO",
+          "name": "Diego Salazar",
+          "role": "Jefe de Operaciones"
+        }
+      ],
+      "sharedProfile": {
+        "antiguedadOrganizacionAnos": 6,
+        "antiguedadCargoAnos": 2,
+        "personasACargo": 18,
+        "descripcion": "Conoce bien el ritmo del área y sabe que una mala decisión puede afectar directamente la continuidad del servicio. Ahora debe liderar la implementación de un nuevo proceso digital sin detener una operación que no puede darse el lujo de esperar."
+      }
+    },
+    "trajectoryLabels": {
+      "S1_A": "Aclaraste",
+      "S1_B": "Exploraste",
+      "S1_C": "Probaste",
+      "S2_A": "Acompañaste",
+      "S2_B": "Facilitaste",
+      "S2_C": "Repriorizaste",
+      "S3_A": "Observaste",
+      "S3_B": "Validaste",
+      "S3_C": "Contuviste"
+    },
+    "contextoInicial": {
+      "cambio": "La organización se prepara para implementar un nuevo proceso digital que modificará parte de la forma habitual de trabajar. La preparación ya ha comenzado: el equipo debe familiarizarse con la nueva forma de trabajo y realizar prácticas mientras la operación continúa funcionando.",
+      "puntoDePartida": [
+        "El plan contempla 10 días para preparar el lanzamiento.",
+        "La simulación comienza en el Día 2, cuando quedan 8 días para el lanzamiento."
+      ]
+    }
+  },
+  "sourceMap": [
+    {
+      "id": "SRC001",
+      "tipo": "principio",
+      "contenido": "Una misma iniciativa de cambio puede ser interpretada de maneras diferentes. Comprender las perspectivas y razones reales de la oposición es necesario antes de intervenir.",
+      "referencia": "Hodges, Managing and Leading People through Organizational Change, cap. 4, sección Interpretations of opposition / Understanding opposition."
+    },
+    {
+      "id": "SRC002",
+      "tipo": "criterio",
+      "contenido": "Encontrar la causa raíz de la oposición requiere investigar debajo de la conducta observable; una interpretación superficial puede hacer que la gestión empeore la situación.",
+      "referencia": "Hodges, cap. 4, sección Understanding opposition / Potential causes of opposition."
+    },
+    {
+      "id": "SRC003",
+      "tipo": "concepto",
+      "contenido": "Learning anxiety surge ante el temor de que aprender nuevas formas de trabajar resulte difícil, haga parecer incompetente a la persona o implique abandonar formas conocidas de trabajo.",
+      "referencia": "Hodges, cap. 4, sección Learning anxiety."
+    },
+    {
+      "id": "SRC004",
+      "tipo": "buena_practica",
+      "contenido": "La learning anxiety puede reducirse mediante un entorno seguro para aprender y apoyos como formación, coaching y feedback.",
+      "referencia": "Hodges, cap. 4, sección Learning anxiety."
+    },
+    {
+      "id": "SRC005",
+      "tipo": "principio",
+      "contenido": "La oposición puede constituir un aporte valioso al cambio y revelar deficiencias del propósito, enfoque o implementación.",
+      "referencia": "Hodges, cap. 4, sección Opposition as a positive reaction."
+    },
+    {
+      "id": "SRC006",
+      "tipo": "concepto",
+      "contenido": "La productive opposition permite que quienes cuestionan una iniciativa contribuyan a moldear decisiones e iniciativas de cambio.",
+      "referencia": "Hodges, cap. 4, sección Opposition as a positive reaction."
+    }
+  ],
+  "optionalSteps": {
+    "evidence": false,
+    "reasoning": false,
+    "anticipation": false
+  },
+  "behaviors": [
+    {
+      "id": "diagnostica_antes_de_actuar",
+      "label": "Diagnostica antes de actuar",
+      "fortalezaSnippet": "Mostraste mayor consistencia al buscar información y distinguir qué estaba ocurriendo antes de decidir cómo intervenir.",
+      "riesgoSnippet": "En varias decisiones actuaste con información limitada antes de comprobar qué estaba generando realmente la oposición.",
+      "sourceRefs": [
+        "SRC001",
+        "SRC002"
+      ]
+    },
+    {
+      "id": "ajusta_intervencion_a_barrera",
+      "label": "Ajusta la intervención a la barrera",
+      "fortalezaSnippet": "Mostraste capacidad para adaptar tu respuesta al problema concreto que estaba dificultando el cambio.",
+      "riesgoSnippet": "En algunas situaciones utilizaste una intervención razonable, pero no completamente ajustada a la barrera que estaba apareciendo.",
+      "sourceRefs": [
+        "SRC002",
+        "SRC003",
+        "SRC004"
+      ]
+    },
+    {
+      "id": "integra_oposicion_como_insumo",
+      "label": "Integra la oposición como insumo",
+      "fortalezaSnippet": "Utilizaste las voces críticas como información para comprender, comprobar o mejorar el cambio sin tratarlas automáticamente como un obstáculo.",
+      "riesgoSnippet": "Tendiste a aprovechar solo parcialmente la información contenida en las voces críticas antes de continuar con la implementación.",
+      "sourceRefs": [
+        "SRC001",
+        "SRC005",
+        "SRC006"
+      ]
+    }
+  ],
+  "indicators": [
+    {
+      "id": "apertura_oposicion",
+      "label": "Apertura para plantear preocupaciones",
+      "initial": 55,
+      "min": 0,
+      "max": 100,
+      "direction": "higher-is-better"
+    },
+    {
+      "id": "capacidad_adaptacion",
+      "label": "Capacidad del equipo para adaptarse",
+      "initial": 50,
+      "min": 0,
+      "max": 100,
+      "direction": "higher-is-better"
+    },
+    {
+      "id": "ajuste_operativo",
+      "label": "Ajuste del cambio a la realidad operativa",
+      "initial": 60,
+      "min": 0,
+      "max": 100,
+      "direction": "higher-is-better"
+    },
+    {
+      "id": "riesgo_cronograma",
+      "label": "Riesgo sobre el cronograma",
+      "initial": 35,
+      "min": 0,
+      "max": 100,
+      "direction": "lower-is-better"
+    }
+  ],
+  "rounds": [
+    {
+      "id": "R1",
+      "label": "Comprender",
+      "proposito": "Interpretar qué puede existir detrás de la oposición antes de intervenir.",
+      "situations": [
+        {
+          "id": "S1",
+          "title": "¿Qué te está diciendo la resistencia?",
+          "framing": "Día 2 · Faltan 8 días\nSeis personas aún no completan las prácticas previstas.\nEn el equipo empiezan a surgir dudas: para qué sirve el nuevo proceso, qué implicará para su forma de trabajar y si realmente facilitará la operación.\nBruno, uno de los operadores con mayor experiencia, considera que el diseño no refleja suficientemente lo que ocurre en la operación diaria.\nEl cronograma no se mueve.\nTienes que decidir qué hacer primero.",
+          "sourceRefs": [
+            "SRC001",
+            "SRC002"
+          ],
+          "options": [
+            {
+              "id": "S1_A",
+              "texto": "Aclarar y recoger: comunicas propósito, cronograma y aspectos ya definidos; habilitas además un formulario anónimo para recoger las principales preocupaciones y responderlas al día siguiente.",
+              "behaviorScores": {
+                "diagnostica_antes_de_actuar": 1,
+                "ajusta_intervencion_a_barrera": 1,
+                "integra_oposicion_como_insumo": 2
+              },
+              "effects": {
+                "apertura_oposicion": 1,
+                "capacidad_adaptacion": 3,
+                "ajuste_operativo": 2,
+                "riesgo_cronograma": -3
+              },
+              "diseno": {
+                "alineacion": "media",
+                "justificacion": "Aporta claridad y recoge información de manera amplia, pero todavía ofrece poca profundidad para comprender las causas reales de las distintas reacciones.",
+                "sourceRefs": [
+                  "SRC001",
+                  "SRC002"
+                ]
+              },
+              "feedback_alumno": "Ganaste velocidad y amplitud. Ahora conoces los temas que preocupan al equipo, pero todavía no comprendes completamente qué los está generando."
+            },
+            {
+              "id": "S1_B",
+              "texto": "Explorar causas: convocas una conversación breve para distinguir problemas de comprensión, carga, autonomía, consecuencias para el rol y capacidad para utilizar el nuevo proceso antes de definir acciones.",
+              "behaviorScores": {
+                "diagnostica_antes_de_actuar": 3,
+                "ajusta_intervencion_a_barrera": 3,
+                "integra_oposicion_como_insumo": 3
+              },
+              "effects": {
+                "apertura_oposicion": 12,
+                "capacidad_adaptacion": 5,
+                "ajuste_operativo": 4,
+                "riesgo_cronograma": 5
+              },
+              "diseno": {
+                "alineacion": "alta",
+                "justificacion": "Distingue causas antes de intervenir y utiliza distintas perspectivas para orientar una respuesta más precisa, aunque consume tiempo.",
+                "sourceRefs": [
+                  "SRC001",
+                  "SRC002"
+                ]
+              },
+              "feedback_alumno": "Ganaste comprensión. Descubriste que las reacciones no tenían una única causa, aunque utilizaste tiempo valioso cuando el cronograma ya estaba ajustado."
+            },
+            {
+              "id": "S1_C",
+              "texto": "Probar antes de ampliar: creas un pequeño grupo con Bruno, dos operadores y un supervisor para utilizar el nuevo proceso en casos reales y regresar con problemas, evidencias y recomendaciones.",
+              "behaviorScores": {
+                "diagnostica_antes_de_actuar": 2,
+                "ajusta_intervencion_a_barrera": 2,
+                "integra_oposicion_como_insumo": 2
+              },
+              "effects": {
+                "apertura_oposicion": 6,
+                "capacidad_adaptacion": 3,
+                "ajuste_operativo": 10,
+                "riesgo_cronograma": 4
+              },
+              "diseno": {
+                "alineacion": "media",
+                "justificacion": "Genera evidencia operativa útil y aprovecha conocimiento experto, pero representa solo una parte de las perspectivas del equipo.",
+                "sourceRefs": [
+                  "SRC001",
+                  "SRC002",
+                  "SRC005"
+                ]
+              },
+              "feedback_alumno": "Ganaste evidencia concreta sobre la operación, pero escuchaste a una parte pequeña del equipo y aparecieron preguntas sobre quién estaba siendo incluido."
+            }
+          ],
+          "evidence": null,
+          "reasoning": null,
+          "anticipation": null,
+          "debrief": {
+            "queEstabaEnJuego": "Comprender qué información obtenías y qué podía quedar fuera antes de intervenir.",
+            "paraDiscutir": [
+              "¿Qué información obtuviste gracias a tu decisión?",
+              "¿Qué información pudo quedar fuera?"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "R2",
+      "label": "Facilitar",
+      "proposito": "Responder a la ansiedad y a las barreras de aprendizaje sin depender únicamente de aumentar la presión.",
+      "situations": [
+        {
+          "id": "S2",
+          "title": "¿Presionas o facilitas el aprendizaje?",
+          "framing": "Día 5. Faltan 5 días. Algo más de la mitad del equipo completa correctamente las prácticas. Otras personas repiten errores o abandonan ejercicios. Algunas temen quedar expuestas por equivocarse; otras señalan que la carga de trabajo les deja poco tiempo. La fecha no puede modificarse.",
+          "sourceRefs": [
+            "SRC003",
+            "SRC004"
+          ],
+          "options": [
+            {
+              "id": "S2_A",
+              "texto": "Acompañamiento focalizado: mantienes el cronograma y convocas a quienes presentan mayores dificultades a dos sesiones obligatorias con sus supervisores, sin modificar la carga operativa.",
+              "behaviorScores": {
+                "diagnostica_antes_de_actuar": 1,
+                "ajusta_intervencion_a_barrera": 2,
+                "integra_oposicion_como_insumo": 1
+              },
+              "effects": {
+                "apertura_oposicion": -4,
+                "capacidad_adaptacion": 8,
+                "ajuste_operativo": 1,
+                "riesgo_cronograma": 1
+              },
+              "diseno": {
+                "alineacion": "media",
+                "justificacion": "Ofrece apoyo directo, pero mantiene intacta la carga y puede hacer más visible quién está teniendo dificultades.",
+                "sourceRefs": [
+                  "SRC003",
+                  "SRC004"
+                ]
+              },
+              "feedback_alumno": "Concentraste el apoyo donde parecía más necesario. Algunas personas mejoraron, pero también hiciste más visible quién estaba quedándose atrás y la presión operativa permaneció."
+            },
+            {
+              "id": "S2_B",
+              "texto": "Práctica compartida: reservas dos bloques breves dentro de la jornada para practicar en grupos pequeños, con apoyo de compañeros que dominan el proceso y feedback durante la práctica.",
+              "behaviorScores": {
+                "diagnostica_antes_de_actuar": 2,
+                "ajusta_intervencion_a_barrera": 3,
+                "integra_oposicion_como_insumo": 3
+              },
+              "effects": {
+                "apertura_oposicion": 8,
+                "capacidad_adaptacion": 15,
+                "ajuste_operativo": 5,
+                "riesgo_cronograma": 6
+              },
+              "diseno": {
+                "alineacion": "alta",
+                "justificacion": "Crea condiciones de práctica, apoyo y feedback consistentes con la reducción de learning anxiety, con costo real sobre capacidad operativa.",
+                "sourceRefs": [
+                  "SRC003",
+                  "SRC004"
+                ]
+              },
+              "feedback_alumno": "Mejoraste las condiciones para aprender y aparecieron errores que antes permanecían ocultos. El costo fue utilizar capacidad operativa en un momento de alta demanda."
+            },
+            {
+              "id": "S2_C",
+              "texto": "Tiempo protegido: repriorizas durante 48 horas parte de la carga de quienes presentan mayor retraso y les permites practicar individualmente, solicitando ayuda cuando la necesiten.",
+              "behaviorScores": {
+                "diagnostica_antes_de_actuar": 2,
+                "ajusta_intervencion_a_barrera": 2,
+                "integra_oposicion_como_insumo": 1
+              },
+              "effects": {
+                "apertura_oposicion": 2,
+                "capacidad_adaptacion": 8,
+                "ajuste_operativo": 1,
+                "riesgo_cronograma": 4
+              },
+              "diseno": {
+                "alineacion": "media",
+                "justificacion": "Reduce una restricción real de capacidad, pero deja el acompañamiento principalmente a demanda y no resuelve necesariamente dificultades de aprendizaje.",
+                "sourceRefs": [
+                  "SRC003",
+                  "SRC004"
+                ]
+              },
+              "feedback_alumno": "Creaste espacio para aprender. Algunas personas avanzaron rápidamente; otras siguieron repitiendo errores porque el problema no era únicamente disponer de tiempo."
+            }
+          ],
+          "evidence": null,
+          "reasoning": null,
+          "anticipation": null,
+          "debrief": {
+            "queEstabaEnJuego": "Identificar qué barrera estabas atendiendo y cuál podía permanecer sin respuesta.",
+            "paraDiscutir": [
+              "¿Qué barrera atendiste principalmente con tu decisión?",
+              "¿Qué barrera quedó menos atendida?"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "R3",
+      "label": "Aprender de la oposición",
+      "proposito": "Examinar una objeción operativa sin descartarla automáticamente ni convertirla automáticamente en un veto al cambio.",
+      "situations": [
+        {
+          "id": "S3",
+          "title": "¿Y si la oposición está señalando algo que no estamos viendo?",
+          "framing": "Día 8. Faltan 2 días. El nuevo proceso exige una aprobación adicional antes de cerrar determinados casos urgentes. Ese paso busca aumentar el control, pero Bruno y otros operadores sostienen que puede generar retrasos. El responsable del proyecto advierte que modificar el diseño tan cerca del lanzamiento también supone un riesgo.",
+          "sourceRefs": [
+            "SRC005",
+            "SRC006"
+          ],
+          "options": [
+            {
+              "id": "S3_A",
+              "texto": "Observar después del lanzamiento: mantienes el diseño aprobado, creas un registro específico de casos urgentes durante la primera semana y revisas diariamente si aparecen retrasos antes de proponer un cambio.",
+              "behaviorScores": {
+                "diagnostica_antes_de_actuar": 2,
+                "ajusta_intervencion_a_barrera": 2,
+                "integra_oposicion_como_insumo": 2
+              },
+              "effects": {
+                "apertura_oposicion": 3,
+                "capacidad_adaptacion": 0,
+                "ajuste_operativo": 6,
+                "riesgo_cronograma": -5
+              },
+              "diseno": {
+                "alineacion": "media",
+                "justificacion": "No descarta la objeción y genera evidencia real, pero opta por aprender después de implementar y acepta el riesgo de que usuarios experimenten el problema.",
+                "sourceRefs": [
+                  "SRC005",
+                  "SRC006"
+                ]
+              },
+              "feedback_alumno": "Protegiste el cronograma y reuniste evidencia real. El costo fue decidir aprender después del lanzamiento, cuando algunos casos ya habían experimentado el retraso."
+            },
+            {
+              "id": "S3_B",
+              "texto": "Validar antes del lanzamiento: reproduces varios casos urgentes con operadores y proyecto; si el problema aparece de manera consistente, modificas únicamente ese paso antes de implementar.",
+              "behaviorScores": {
+                "diagnostica_antes_de_actuar": 3,
+                "ajusta_intervencion_a_barrera": 3,
+                "integra_oposicion_como_insumo": 3
+              },
+              "effects": {
+                "apertura_oposicion": 8,
+                "capacidad_adaptacion": 2,
+                "ajuste_operativo": 12,
+                "riesgo_cronograma": 7
+              },
+              "diseno": {
+                "alineacion": "alta",
+                "justificacion": "Convierte la oposición en una hipótesis verificable y utiliza evidencia para ajustar solo la parte necesaria, asumiendo costo de tiempo cerca del lanzamiento.",
+                "sourceRefs": [
+                  "SRC005",
+                  "SRC006"
+                ]
+              },
+              "feedback_alumno": "Pusiste la objeción a prueba antes del lanzamiento. Confirmaste que el problema aparecía solo en ciertas urgencias y ajustaste únicamente ese paso, con presión adicional sobre el cronograma."
+            },
+            {
+              "id": "S3_C",
+              "texto": "Crear una excepción temporal: mantienes el proceso principal, habilitas una vía especial para urgencias y registras durante una semana cuándo se utiliza antes de decidir si debe convertirse en un ajuste permanente.",
+              "behaviorScores": {
+                "diagnostica_antes_de_actuar": 2,
+                "ajusta_intervencion_a_barrera": 2,
+                "integra_oposicion_como_insumo": 2
+              },
+              "effects": {
+                "apertura_oposicion": 5,
+                "capacidad_adaptacion": 1,
+                "ajuste_operativo": 7,
+                "riesgo_cronograma": 4
+              },
+              "diseno": {
+                "alineacion": "media",
+                "justificacion": "Reconoce la objeción y protege la operación, pero introduce temporalmente un proceso paralelo que puede generar complejidad.",
+                "sourceRefs": [
+                  "SRC005",
+                  "SRC006"
+                ]
+              },
+              "feedback_alumno": "Protegiste el lanzamiento y los casos urgentes mediante una excepción. El costo fue introducir una segunda forma de trabajar que comenzó a requerir control adicional."
+            }
+          ],
+          "evidence": null,
+          "reasoning": null,
+          "anticipation": null,
+          "debrief": {
+            "queEstabaEnJuego": "Equilibrar la presión del cronograma con la posibilidad de que una voz crítica estuviera revelando una debilidad real del cambio.",
+            "paraDiscutir": [
+              "¿Cómo equilibraste el plazo con la calidad del cambio?",
+              "¿Qué evidencia necesitabas antes de decidir?"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "conditionalEvents": [
+    {
+      "id": "EV_S1_A_S2",
+      "priority": 10,
+      "condition": {
+        "type": "decision",
+        "ref": "S1",
+        "op": "selected",
+        "value": "S1_A"
+      },
+      "effect": {
+        "situationId": "S2",
+        "contextMode": "prepend",
+        "contextText": "Tres días después, el equipo ha avanzado, pero algunas personas hacen menos preguntas. No sabes si las dudas disminuyeron o si simplemente dejaron de expresarse."
+      }
+    },
+    {
+      "id": "EV_S1_B_S2",
+      "priority": 10,
+      "condition": {
+        "type": "decision",
+        "ref": "S1",
+        "op": "selected",
+        "value": "S1_B"
+      },
+      "effect": {
+        "situationId": "S2",
+        "contextMode": "prepend",
+        "contextText": "Tres días después, las personas distinguen mejor qué les preocupa y llegan con preguntas más concretas. También esperan respuestas diferentes para problemas diferentes."
+      }
+    },
+    {
+      "id": "EV_S1_C_S2",
+      "priority": 10,
+      "condition": {
+        "type": "decision",
+        "ref": "S1",
+        "op": "selected",
+        "value": "S1_C"
+      },
+      "effect": {
+        "situationId": "S2",
+        "contextMode": "prepend",
+        "contextText": "Tres días después, Bruno y quienes participaron en la prueba están más involucrados. Otros integrantes del equipo empiezan a pedir mayor participación."
+      }
+    },
+    {
+      "id": "EV_S2_A_S3",
+      "priority": 10,
+      "condition": {
+        "type": "decision",
+        "ref": "S2",
+        "op": "selected",
+        "value": "S2_A"
+      },
+      "effect": {
+        "situationId": "S3",
+        "contextMode": "prepend",
+        "contextText": "Uno de los operadores que recibió acompañamiento detecta algo extraño durante una práctica. Antes de plantearlo delante del equipo, busca a Bruno para confirmar que no sea simplemente otro error suyo."
+      }
+    },
+    {
+      "id": "EV_S2_B_S3",
+      "priority": 10,
+      "condition": {
+        "type": "decision",
+        "ref": "S2",
+        "op": "selected",
+        "value": "S2_B"
+      },
+      "effect": {
+        "situationId": "S3",
+        "contextMode": "prepend",
+        "contextText": "Durante una práctica grupal, tres personas encuentran el mismo problema y consiguen reproducirlo frente a los demás."
+      }
+    },
+    {
+      "id": "EV_S2_C_S3",
+      "priority": 10,
+      "condition": {
+        "type": "decision",
+        "ref": "S2",
+        "op": "selected",
+        "value": "S2_C"
+      },
+      "effect": {
+        "situationId": "S3",
+        "contextMode": "prepend",
+        "contextText": "Una colaboradora que estaba practicando individualmente registra un retraso en un caso urgente. Tiene evidencia de un caso, pero todavía nadie sabe si el problema se repite."
+      }
+    }
+  ],
+  "scoring": {
+    "mode": "behavior_profile",
+    "minObservationsForInterpretation": 2,
+    "minEligibleBehaviorsForComparison": 2
+  },
+  "finalReport": {
+    "tipo": "veredicto",
+    "structure": [
+      "header",
+      "verdict",
+      "explanation",
+      "whatHappened",
+      "mainTension (tensión | balance)",
+      "nextStep",
+      "restart"
+    ],
+    "header": {
+      "eyebrow": "INFORME FINAL DE SIMULACIÓN",
+      "question": "¿Estás gestionando la resistencia… o la estás aumentando?"
+    },
+    "explanation": {
+      "maxSentences": 2,
+      "alto": "En este recorrido buscaste comprender lo que ocurría, respondiste a las barreras que aparecieron y utilizaste información crítica para orientar el cambio.",
+      "medio": {
+        "unique": "En este recorrido tomaste varias decisiones adecuadas frente a la oposición; donde menos profundizaste fue en {lowest}.",
+        "tie": "En este recorrido tomaste varias decisiones adecuadas frente a la oposición, aunque no siempre profundizaste de la misma manera en sus causas, barreras o información disponible."
+      },
+      "bajo": {
+        "leadIfFavorableEffects": "En varios momentos, tus decisiones ayudaron a atender necesidades concretas sin profundizar de la misma manera en las causas o barreras que estaban detrás de la oposición.",
+        "leadOtherwise": "En varios momentos, tus decisiones no profundizaron de la misma manera en las causas o barreras que estaban detrás de la oposición.",
+        "unique": "El aspecto menos atendido fue {lowest}.",
+        "tie": "La menor profundidad se repartió entre más de un aspecto de la gestión."
+      },
+      "repetitionRule": "La misma valoración (consistencia) no aparece en tres secciones; \"poco consistente\" solo en la respuesta principal; explicación y sección 02 no comparten frases de 6+ palabras."
+    },
+    "sections": {
+      "whatHappened": {
+        "title": "01 · ¿Qué ocurrió con el cambio?",
+        "source": "effects (accumulated over the three selected options)",
+        "showNumericValues": false,
+        "indicators": [
+          {
+            "id": "apertura_oposicion",
+            "label": "Apertura para expresar preocupaciones",
+            "positive": "Mejoró",
+            "negative": "Empeoró",
+            "zero": "Sin cambio",
+            "favorableWhen": "positive"
+          },
+          {
+            "id": "capacidad_adaptacion",
+            "label": "Condiciones para adaptarse",
+            "positive": "Mejoraron",
+            "negative": "Empeoraron",
+            "zero": "Sin cambio",
+            "favorableWhen": "positive"
+          },
+          {
+            "id": "ajuste_operativo",
+            "label": "Ajuste a la realidad operativa",
+            "positive": "Mejoró",
+            "negative": "Empeoró",
+            "zero": "Sin cambio",
+            "favorableWhen": "positive"
+          },
+          {
+            "id": "riesgo_cronograma",
+            "label": "Riesgo sobre el cronograma",
+            "positive": "Aumentó",
+            "negative": "Disminuyó",
+            "zero": "Sin cambio",
+            "favorableWhen": "negative"
+          }
+        ],
+        "tones": {
+          "favorable": "green",
+          "unfavorable": "amber",
+          "neutral": "gray"
+        }
+      },
+      "mainTension": {
+        "titles": {
+          "tension": "02 · La tensión de tu recorrido",
+          "balance": "02 · El balance de tu recorrido"
+        },
+        "source": "behaviorScores band + effects",
+        "effectClasses": {
+          "favorable": "al menos una condición mejora, ninguna empeora y el riesgo no aumenta",
+          "favorableRiskUp": "al menos una condición mejora, ninguna empeora y el riesgo aumenta",
+          "mixed": "hay efectos favorables y desfavorables",
+          "unfavorable": "solo efectos desfavorables",
+          "none": "sin cambios"
+        },
+        "rules": [
+          {
+            "id": "A",
+            "when": "alto + favorableRiskUp",
+            "label": "tension",
+            "title": "El cambio mostró avances claros y, al mismo tiempo, aumentó la presión sobre el plazo.",
+            "text": "{topFavorable (1–2)} {mejoró|mejoraron}, mientras aumentó la presión sobre el plazo."
+          },
+          {
+            "id": "B",
+            "when": "alto + favorable",
+            "label": "balance",
+            "title": "La forma de gestionar la resistencia y los resultados del recorrido fueron consistentes entre sí.",
+            "text": "{topFavorable (1–2)} {mejoró|mejoraron}{riskUnchanged: sin que aumentara la presión sobre el plazo}."
+          },
+          {
+            "id": "C",
+            "when": "medio + favorable",
+            "label": "tension",
+            "title": "El cambio avanzó favorablemente, aunque tu forma de gestionar la resistencia fue desigual.",
+            "text": "Obtuviste resultados positivos en el escenario, pero algunas decisiones abordaron mejor que otras las causas y barreras que estaban detrás de la oposición."
+          },
+          {
+            "id": "D",
+            "when": "bajo + favorable",
+            "label": "tension",
+            "title": "Obtuviste resultados favorables, aunque algunas decisiones dejaron aspectos de la oposición insuficientemente explorados.",
+            "text": "{topFavorable (1–2, incl. cronograma)} {mejoró|mejoraron}{riskDown: y el cronograma ganó margen}. Al mismo tiempo, varias respuestas atendieron necesidades inmediatas sin explorar con la misma profundidad {lowestFocus}."
+          },
+          {
+            "id": "E",
+            "when": "(alto|medio) + (favorableRiskUp no cubierto por A | mixed | unfavorable)",
+            "label": "tension",
+            "title": "Hubo avances en el cambio, aunque también aumentó la presión sobre el plazo.",
+            "titleVariants": { "otherCost": "Hubo avances en el cambio, aunque también se observaron efectos desfavorables en el escenario.", "noFavorable": "En el escenario se observaron efectos desfavorables sin avances en las condiciones del cambio." },
+            "text": "{topFavorable (1–2)} {mejoró|mejoraron}, mientras {unfavorable effects}.",
+            "note": "Formulación de balance: 1–2 avances relevantes (mayor delta) + costo real. Si no hay avances: \"En el escenario, {unfavorable effects}.\""
+          },
+          {
+            "id": "F",
+            "when": "bajo + (favorableRiskUp | mixed | unfavorable)",
+            "label": "tension",
+            "title": "Hubo avances en el cambio, aunque también aumentó la presión sobre el plazo.",
+            "titleVariants": { "otherCost": "Hubo avances en el cambio, aunque también se observaron efectos desfavorables en el escenario.", "noFavorable": "En el escenario se observaron efectos desfavorables sin avances en las condiciones del cambio." },
+            "text": "{topFavorable (1–2)} {mejoró|mejoraron}, mientras {unfavorable effects}. Al mismo tiempo, algunas causas o barreras de la oposición quedaron insuficientemente atendidas.",
+            "note": "No se afirma que la gestión causara los efectos del escenario."
+          },
+          {
+            "id": "N",
+            "when": "none",
+            "label": "balance",
+            "title": "Tus decisiones no modificaron las condiciones observadas del cambio.",
+            "text": ""
+          }
+        ],
+        "unfavorablePhrases": {
+          "apertura_oposicion": "empeoró la apertura para expresar preocupaciones",
+          "capacidad_adaptacion": "empeoraron las condiciones para adaptarse",
+          "ajuste_operativo": "empeoró el ajuste a la realidad operativa",
+          "riesgo_cronograma": "aumentó la presión sobre el plazo"
+        },
+        "improvedNouns": {
+          "apertura_oposicion": "la apertura",
+          "capacidad_adaptacion": "la adaptación",
+          "ajuste_operativo": "el ajuste operativo"
+        },
+        "coherenceRule": "Si conducta y consecuencias no coinciden, no se modifican los datos: la sección 02 explica el desacople.",
+        "lowestFocus": {
+          "diagnostica_antes_de_actuar": "qué estaba generando la reacción",
+          "ajusta_intervencion_a_barrera": "qué barrera necesitaba respuesta",
+          "integra_oposicion_como_insumo": "qué información contenían las objeciones",
+          "tie": "las causas y barreras de cada reacción"
+        },
+        "favorableNouns": {
+          "apertura_oposicion": {
+            "t": "la apertura para expresar preocupaciones",
+            "pl": false
+          },
+          "capacidad_adaptacion": {
+            "t": "las condiciones para adaptarse",
+            "pl": true
+          },
+          "ajuste_operativo": {
+            "t": "el ajuste a la realidad operativa",
+            "pl": false
+          }
+        },
+        "maxFavorablesInSummary": 2
+      },
+      "nextStep": {
+        "title": "03 · Qué puedes llevar a tu próxima gestión",
+        "source": "behaviorScores",
+        "ifVerdictIndexAtLeast": 2.5,
+        "consistentText": "Sigue cuidando tres cosas: comprender qué está generando la reacción, responder a la barrera adecuada y comprobar si una objeción contiene información útil para mejorar el cambio.",
+        "lowestRule": "lowest_eligible_behavior_mean (unrounded)",
+        "byLowest": {
+          "diagnostica_antes_de_actuar": {
+            "title": "Antes de actuar, pregúntate qué está generando realmente la reacción.",
+            "text": "Comprender la causa antes de intervenir puede ayudarte a elegir una respuesta más ajustada y evitar que una solución útil en el corto plazo deje sin atender el problema de fondo."
+          },
+          "ajusta_intervencion_a_barrera": {
+            "title": "Identifica primero qué barrera necesita respuesta; no toda resistencia requiere la misma intervención.",
+            "text": "Una respuesta útil para un problema de comprensión puede no servir frente a una dificultad de aprendizaje, carga o diseño operativo."
+          },
+          "integra_oposicion_como_insumo": {
+            "title": "Antes de descartar una objeción, comprueba si contiene información que podría mejorar el cambio.",
+            "text": "Una voz crítica puede señalar una dificultad real de implementación que conviene verificar antes de decidir cómo responder."
+          }
+        },
+        "tieRule": "If two or three eligible behaviors share the lowest mean, do not pick one; show tieText.",
+        "tieText": "Antes de responder a la resistencia, pregúntate: ¿qué la está generando?, ¿qué barrera necesita respuesta? y ¿esta objeción contiene información que podría mejorar el cambio?"
+      }
+    },
+    "removed": [
+      "behavior profile",
+      "scores",
+      "bars",
+      "decision trajectory",
+      "rankings",
+      "technical names",
+      "fundamentos",
+      "referencias"
+    ],
+    "restartLabel": "Volver a jugar",
+    "principle": "Resultado principal = calidad de la gestión (behaviorScores). 01 = consecuencias (effects). 02 = relación entre ambas; no se fuerza coincidencia. 03 = aprendizaje del aspecto menos consistente o consolidación.",
+    "behaviorPlainLanguage": {
+      "diagnostica_antes_de_actuar": "comprender qué estaba generando la reacción antes de intervenir",
+      "ajusta_intervencion_a_barrera": "responder a la barrera que realmente estaba apareciendo",
+      "integra_oposicion_como_insumo": "utilizar las objeciones como información para revisar y mejorar el cambio"
+    }
+  },
+  "changelog": [
+    {
+      "version": "1.1",
+      "status": "DRAFT",
+      "changes": [
+        "Resultado principal basado exclusivamente en behaviorScores mediante verdictIndex.",
+        "diseno.alineacion excluido del resultado; queda solo para diseño y QA interno.",
+        "Nueva estructura del informe final (resultado, explicación, 01–03).",
+        "Reglas de recomendación y tratamiento de empates.",
+        "Situaciones, alternativas, behaviorScores, effects, feedback, conditionalEvents y debrief sin cambios."
+      ]
+    },
+    {
+      "version": "1.1",
+      "revision": 2,
+      "status": "DRAFT",
+      "changes": [
+        "Textos de resultado reformulados: describen solo la calidad de la gestión (behaviorScores), sin afirmar que la resistencia aumentó.",
+        "Explicación de máximo 2 frases con traducción de behaviors a lenguaje del participante.",
+        "Sección 02 interpreta conjuntamente gestión (behaviorScores) y consecuencias (effects) con reglas A–F; título \"El balance de tu recorrido\" cuando no hay contraste.",
+        "Sección 03 con texto de apoyo por behavior menor.",
+        "Situaciones, alternativas, behaviorScores y effects sin cambios."
+      ]
+    },
+    {
+      "version": "1.1",
+      "revision": 3,
+      "status": "DRAFT",
+      "changes": [
+        "E/F: la sección 02 sintetiza 1–2 avances relevantes y el costo real, sin repetir la lista de 01 ni inferir causalidad.",
+        "Gestión baja: \"poco consistente\" solo en la respuesta principal; explicación y sección 02 con lenguaje descriptivo.",
+        "Sin cambios en cálculos, behaviorScores, effects, umbrales ni reglas de clasificación.",
+        "Explicación alta y media sin repetir la valoración de consistencia de la respuesta principal."
+      ]
+    }
+  ],
+  "verdict": {
+    "question": "¿Estás gestionando la resistencia… o la estás aumentando?",
+    "source": "behaviorScores",
+    "excludedFromVerdict": [
+      "diseno.alineacion",
+      "effects"
+    ],
+    "index": {
+      "id": "verdictIndex",
+      "method": "mean_of_eligible_behavior_means",
+      "behaviorMean": "mean of behaviorScores across the selected options (one per situation)",
+      "eligibility": "observations >= scoring.minObservationsForInterpretation",
+      "weights": "equal",
+      "rounding": "none",
+      "visibleToParticipant": false
+    },
+    "bands": [
+      {
+        "id": "alto",
+        "min": 2.5,
+        "text": "La estás gestionando de manera consistente."
+      },
+      {
+        "id": "medio",
+        "min": 2,
+        "maxExclusive": 2.5,
+        "text": "La estás gestionando, aunque no siempre con la misma consistencia."
+      },
+      {
+        "id": "bajo",
+        "maxExclusive": 2,
+        "text": "Tu gestión de la resistencia fue poco consistente y dejó aspectos importantes sin atender."
+      }
+    ],
+    "hiddenFromParticipant": [
+      "verdictIndex",
+      "behavior means",
+      "scores",
+      "percentages",
+      "scales",
+      "bars",
+      "behavior ids/labels"
+    ],
+    "forbiddenClaims": [
+      "estás aumentando la resistencia",
+      "tus decisiones intensificaron la resistencia",
+      "la resistencia aumentó (sin indicador que lo sustente)"
+    ]
+  }
+}
