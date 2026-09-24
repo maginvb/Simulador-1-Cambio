@@ -305,7 +305,7 @@ class Component extends DCLogic {
         this.RL = RL;
         const init = this.init(cfg);
         let saved = null;
-        try { saved = JSON.parse(localStorage.getItem(this.KEY) || 'null'); } catch (e) {}
+        try { localStorage.removeItem(this.KEY); } catch (e) {}
         if (saved && saved.id === cfg.metadata.simulatorId && saved.v === cfg.metadata.configVersion && saved.s) this.setState({ cfg, ...saved.s, screen: saved.s.screen === 'round' ? 'situation' : saved.s.screen, disp: saved.s.vals });
         else this.setState({ cfg, vals: init, disp: init, history: [init] });
         try { window.__reportQA = RL.runQA(cfg); } catch (e) {}
@@ -315,11 +315,7 @@ class Component extends DCLogic {
   componentWillUnmount() { cancelAnimationFrame(this.raf); clearTimeout(this.tt); window.removeEventListener('resize', this.onResize); }
   init(cfg) { const o = {}; cfg.indicators.forEach(i => (o[i.id] = i.initial)); return o; }
   motion() { return (this.props.motion ?? 'Suave') !== 'Ninguna'; }
-  persist() {
-    const s = this.state; if (!s.cfg) return;
-    const { screen, proto, ri, sel, decisions, vals, history, lastDelta } = s;
-    try { localStorage.setItem(this.KEY, JSON.stringify({ id: s.cfg.metadata.simulatorId, v: s.cfg.metadata.configVersion, s: { screen, proto, ri, sel, decisions, vals, history, lastDelta } })); } catch (e) {}
-  }
+  persist() {}
   go(screen, extra) {
     this.setState({ ...(extra || {}), screen, entered: false }, () => {
       try { window.scrollTo({ top: 0, behavior: this.motion() ? 'smooth' : 'auto' }); } catch (e) {}
