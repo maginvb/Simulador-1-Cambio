@@ -20,18 +20,15 @@
   "runtimeExtensions": {
     "protagonistSelection": {
       "enabled": true,
-      "options": [
-        {
-          "id": "VALERIA",
-          "name": "Valeria Rojas",
-          "role": "Jefa de Operaciones"
-        },
-        {
-          "id": "DIEGO",
-          "name": "Diego Salazar",
-          "role": "Jefe de Operaciones"
-        }
-      ],
+      "mode": "participantName",
+      "protagonist": "participant",
+      "role": "Responsable de Operaciones",
+      "nameField": {
+        "label": "TU NOMBRE EN LA SIMULACIÓN",
+        "placeholder": "Escribe tu nombre",
+        "required": true,
+        "usage": "Se guarda para uso moderado en la experiencia; no se repite en cada pantalla."
+      },
       "sharedProfile": {
         "antiguedadOrganizacionAnos": 6,
         "antiguedadCargoAnos": 2,
@@ -53,8 +50,7 @@
     "contextoInicial": {
       "cambio": "La organización se prepara para implementar un nuevo proceso digital que modificará parte de la forma habitual de trabajar. La preparación ya ha comenzado: el equipo debe familiarizarse con la nueva forma de trabajo y realizar prácticas mientras la operación continúa funcionando.",
       "puntoDePartida": [
-        "El plan contempla 10 días para preparar el lanzamiento.",
-        "La simulación comienza en el Día 2, cuando quedan 8 días para el lanzamiento."
+        "Día 2 · Quedan 8 días para el lanzamiento"
       ]
     }
   },
@@ -138,7 +134,7 @@
   "indicators": [
     {
       "id": "apertura_oposicion",
-      "label": "Apertura para plantear preocupaciones",
+      "label": "Apertura para expresar preocupaciones",
       "initial": 55,
       "min": 0,
       "max": 100,
@@ -146,7 +142,7 @@
     },
     {
       "id": "capacidad_adaptacion",
-      "label": "Capacidad del equipo para adaptarse",
+      "label": "Condiciones para adaptarse",
       "initial": 50,
       "min": 0,
       "max": 100,
@@ -154,7 +150,7 @@
     },
     {
       "id": "ajuste_operativo",
-      "label": "Ajuste del cambio a la realidad operativa",
+      "label": "Ajuste a la realidad operativa",
       "initial": 60,
       "min": 0,
       "max": 100,
@@ -821,6 +817,18 @@
         "Gestión baja: \"poco consistente\" solo en la respuesta principal; explicación y sección 02 con lenguaje descriptivo.",
         "Sin cambios en cálculos, behaviorScores, effects, umbrales ni reglas de clasificación.",
         "Explicación alta y media sin repetir la valoración de consistencia de la respuesta principal."
+      ]
+    },
+    {
+      "version": "1.1",
+      "revision": 4,
+      "status": "DRAFT",
+      "changes": [
+        "Se eliminó la selección de protagonista (Valeria Rojas / Diego Salazar).",
+        "El protagonista pasó a ser el participante, en el rol de Responsable de Operaciones; ingresa su nombre en la pantalla inicial.",
+        "contextoInicial.puntoDePartida actualizado a \"Día 2 · Quedan 8 días para el lanzamiento\", igual a lo que muestra la interfaz.",
+        "Perspectiva individual y condiciones del caso sin cambios; situaciones, alternativas, behaviorScores, effects, umbrales e informe final sin cambios.",
+        "indicators[].label alineados con las etiquetas visibles en el panel de impacto y en el informe (sin cambios en ids, valores iniciales ni effects)."
       ]
     }
   ],
